@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.datacluster.client.controller.StatsController"
+      styleClass="view-root" spacing="16">
+    <padding><Insets top="20" left="20" bottom="20" right="20"/></padding>
+
+    <Label text="Statistiques avancées" styleClass="view-title"/>
+
+    <!-- BarChart comparaison inter-nœuds -->
+    <BarChart fx:id="chartComparison" VBox.vgrow="ALWAYS"
+              title="Comparaison inter-nœuds (moyennes mobiles)">
+        <xAxis><CategoryAxis fx:id="xAxisBar" label="Nœud"/></xAxis>
+        <yAxis><NumberAxis fx:id="yAxisBar" label="%" lowerBound="0" upperBound="100" tickUnit="10"/></yAxis>
+    </BarChart>
+
+    <!-- Z-scores -->
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Label text="Z-scores — Nœud :"/>
+        <ComboBox fx:id="cmbZscoreNode" prefWidth="140"/>
+        <VBox styleClass="metric-card" prefWidth="130">
+            <Label text="Z-score CPU"  styleClass="card-label"/>
+            <Label fx:id="lblZscoreCpu" text="—" styleClass="card-value-blue"/>
+        </VBox>
+        <VBox styleClass="metric-card" prefWidth="130">
+            <Label text="Z-score RAM"  styleClass="card-label"/>
+            <Label fx:id="lblZscoreRam" text="—" styleClass="card-value-blue"/>
+        </VBox>
+        <VBox styleClass="metric-card" prefWidth="130">
+            <Label text="Z-score Disk" styleClass="card-label"/>
+            <Label fx:id="lblZscoreDisk" text="—" styleClass="card-value-blue"/>
+        </VBox>
+    </HBox>
+</VBox>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.datacluster.client.controller.NodeDetailController"
+      styleClass="view-root" spacing="12">
+    <padding><Insets top="20" left="20" bottom="20" right="20"/></padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="Détail nœud" styleClass="view-title"/>
+        <Label text="Nœud :"/>
+        <ComboBox fx:id="cmbNode" prefWidth="160"/>
+    </HBox>
+
+    <!-- Valeurs instantanées -->
+    <HBox spacing="15">
+        <VBox styleClass="metric-card" prefWidth="150">
+            <Label text="CPU courant" styleClass="card-label"/>
+            <Label fx:id="lblCurrentCpu" text="—" styleClass="card-value-blue"/>
+        </VBox>
+        <VBox styleClass="metric-card" prefWidth="150">
+            <Label text="RAM courante" styleClass="card-label"/>
+            <Label fx:id="lblCurrentRam" text="—" styleClass="card-value-blue"/>
+        </VBox>
+        <VBox styleClass="metric-card" prefWidth="150">
+            <Label text="Disque courant" styleClass="card-label"/>
+            <Label fx:id="lblCurrentDisk" text="—" styleClass="card-value-blue"/>
+        </VBox>
+    </HBox>
+
+    <!-- Graphique temps réel -->
+    <LineChart fx:id="chartMetrics" VBox.vgrow="ALWAYS"
+               title="Métriques temps réel — 5 min glissantes">
+        <xAxis><NumberAxis fx:id="xAxis" label="Temps (s)" autoRanging="true"/></xAxis>
+        <yAxis><NumberAxis fx:id="yAxis" label="%" lowerBound="0" upperBound="100" tickUnit="10"/></yAxis>
+    </LineChart>
+</VBox>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.datacluster.client.controller.ConfigController"
+      styleClass="view-root" spacing="16" maxWidth="600">
+    <padding><Insets top="20" left="20" bottom="20" right="20"/></padding>
+
+    <Label text="Configuration des seuils" styleClass="view-title"/>
+
+    <GridPane hgap="12" vgap="12">
+        <columnConstraints>
+            <ColumnConstraints prefWidth="180"/>
+            <ColumnConstraints prefWidth="120"/>
+            <ColumnConstraints prefWidth="120"/>
+        </columnConstraints>
+
+        <Label text="Métrique"      GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+        <Label text="WARNING (%)"   GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+        <Label text="CRITICAL (%)"  GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+
+        <Label text="CPU"  GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="txtCpuWarning"   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <TextField fx:id="txtCpuCritical"  GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+        <Label text="RAM"  GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="txtRamWarning"   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <TextField fx:id="txtRamCritical"  GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+        <Label text="Disque" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="txtDiskWarning"  GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <TextField fx:id="txtDiskCritical" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+    </GridPane>
+
+    <HBox spacing="10">
+        <Button fx:id="btnLoad" text="Charger"       styleClass="btn-secondary"/>
+        <Button fx:id="btnSave" text="Enregistrer"   styleClass="btn-primary"/>
+    </HBox>
+
+    <Label fx:id="lblStatus" text="" styleClass="status-msg"/>
+</VBox>

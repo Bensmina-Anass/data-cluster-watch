@@ -1,0 +1,234 @@
+/* ═══════════════════════════════════════════════════════════════
+   DataCluster Watch — Dark Monitoring Theme
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Couleurs de base ──────────────────────────────────────────── */
+.root {
+    -dc-bg-primary:   #1a1d24;
+    -dc-bg-secondary: #23272f;
+    -dc-bg-card:      #2d3142;
+    -dc-border:       #3a3f52;
+    -dc-text-primary: #e8eaf0;
+    -dc-text-muted:   #8892a4;
+    -dc-accent-blue:  #3b82f6;
+    -dc-accent-green: #22c55e;
+    -dc-accent-orange:#f59e0b;
+    -dc-accent-red:   #ef4444;
+    -fx-base:         #1a1d24;
+    -fx-background:   #1a1d24;
+    -fx-control-inner-background: #23272f;
+}
+
+/* ─── Layout global ─────────────────────────────────────────────── */
+.root, BorderPane, StackPane, HBox, VBox, AnchorPane {
+    -fx-background-color: -dc-bg-primary;
+    -fx-text-fill: -dc-text-primary;
+}
+
+/* ─── Panneau de navigation ─────────────────────────────────────── */
+.nav-panel {
+    -fx-background-color: -dc-bg-secondary;
+    -fx-border-color: -dc-border;
+    -fx-border-width: 0 1 0 0;
+}
+
+.nav-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -dc-text-primary;
+    -fx-padding: 4 0 8 4;
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: -dc-text-primary;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 8 12 8 12;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+.nav-btn:hover {
+    -fx-background-color: -dc-bg-card;
+    -fx-text-fill: white;
+}
+
+/* ─── Zone de contenu ───────────────────────────────────────────── */
+.content-pane {
+    -fx-background-color: -dc-bg-primary;
+    -fx-padding: 0;
+}
+
+.view-root {
+    -fx-background-color: -dc-bg-primary;
+}
+
+.view-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -dc-text-primary;
+}
+
+/* ─── Cards métriques ───────────────────────────────────────────── */
+.metric-card {
+    -fx-background-color: -dc-bg-card;
+    -fx-background-radius: 10;
+    -fx-border-color: -dc-border;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 14 16 14 16;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 2);
+}
+
+.card-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: -dc-text-muted;
+    -fx-font-weight: normal;
+}
+.card-sublabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: -dc-text-muted;
+    -fx-padding: 4 0 0 0;
+}
+.card-value-green  { -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: -dc-accent-green; }
+.card-value-blue   { -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: -dc-accent-blue; }
+.card-value-red    { -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: -dc-accent-red; }
+.card-value-orange { -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: -dc-accent-orange; }
+.card-subvalue     { -fx-font-size: 18px; -fx-text-fill: -dc-text-muted; }
+
+/* ─── Status badges ─────────────────────────────────────────────── */
+.status-badge {
+    -fx-background-color: #1e3a4a;
+    -fx-text-fill: -dc-accent-blue;
+    -fx-font-size: 11px;
+    -fx-padding: 2 8 2 8;
+    -fx-background-radius: 10;
+}
+
+/* ─── Barre de statut ───────────────────────────────────────────── */
+.status-bar {
+    -fx-background-color: #0f1117;
+    -fx-border-color: -dc-border;
+    -fx-border-width: 1 0 0 0;
+}
+.status-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -dc-text-muted;
+}
+
+/* ─── Boutons ────────────────────────────────────────────────────── */
+.btn-primary {
+    -fx-background-color: -dc-accent-blue;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 7 16 7 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+.btn-primary:hover { -fx-background-color: derive(-dc-accent-blue, 15%); }
+
+.btn-secondary {
+    -fx-background-color: -dc-bg-card;
+    -fx-text-fill: -dc-text-primary;
+    -fx-border-color: -dc-border;
+    -fx-border-radius: 6;
+    -fx-padding: 7 16 7 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+.btn-secondary:hover { -fx-background-color: derive(-dc-bg-card, 15%); }
+
+/* ─── TableView ─────────────────────────────────────────────────── */
+.table-view {
+    -fx-background-color: -dc-bg-secondary;
+    -fx-border-color: -dc-border;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.table-view .column-header {
+    -fx-background-color: #2a2e3d;
+    -fx-text-fill: -dc-text-muted;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+.table-view .column-header .label {
+    -fx-text-fill: -dc-text-muted;
+}
+.table-view .table-row-cell {
+    -fx-background-color: -dc-bg-secondary;
+    -fx-border-color: transparent transparent #2a2e3d transparent;
+    -fx-text-fill: -dc-text-primary;
+}
+.table-view .table-row-cell:odd {
+    -fx-background-color: #1e2230;
+}
+.table-view .table-row-cell:selected {
+    -fx-background-color: #1e3a5f;
+}
+.table-cell { -fx-text-fill: -dc-text-primary; -fx-font-size: 12px; }
+
+/* ─── ComboBox ───────────────────────────────────────────────────── */
+.combo-box {
+    -fx-background-color: -dc-bg-card;
+    -fx-text-fill: -dc-text-primary;
+    -fx-border-color: -dc-border;
+    -fx-border-radius: 5;
+}
+.combo-box .list-cell { -fx-background-color: -dc-bg-card; -fx-text-fill: -dc-text-primary; }
+.combo-box-popup .list-view { -fx-background-color: -dc-bg-card; -fx-border-color: -dc-border; }
+.combo-box-popup .list-cell:hover { -fx-background-color: -dc-bg-secondary; }
+
+/* ─── TextField ─────────────────────────────────────────────────── */
+.text-field {
+    -fx-background-color: -dc-bg-card;
+    -fx-text-fill: -dc-text-primary;
+    -fx-border-color: -dc-border;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 6 10 6 10;
+}
+.text-field:focused { -fx-border-color: -dc-accent-blue; }
+
+/* ─── TextArea ───────────────────────────────────────────────────── */
+.text-area, .text-area .content {
+    -fx-background-color: -dc-bg-card;
+    -fx-text-fill: -dc-text-primary;
+    -fx-border-color: -dc-border;
+    -fx-border-radius: 6;
+    -fx-control-inner-background: -dc-bg-card;
+}
+
+/* ─── Charts ─────────────────────────────────────────────────────── */
+.chart {
+    -fx-background-color: -dc-bg-secondary;
+    -fx-padding: 10;
+}
+.chart-title      { -fx-text-fill: -dc-text-primary; -fx-font-size: 14px; }
+.axis-label       { -fx-text-fill: -dc-text-muted; }
+.chart-legend     { -fx-background-color: transparent; }
+.default-color0.chart-series-line { -fx-stroke: #ef4444; -fx-stroke-width: 2; }
+.default-color1.chart-series-line { -fx-stroke: #3b82f6; -fx-stroke-width: 2; }
+.default-color2.chart-series-line { -fx-stroke: #22c55e; -fx-stroke-width: 2; }
+.default-color0.chart-bar         { -fx-bar-fill: #ef4444; }
+.default-color1.chart-bar         { -fx-bar-fill: #3b82f6; }
+.default-color2.chart-bar         { -fx-bar-fill: #22c55e; }
+.chart-plot-background  { -fx-background-color: #1a1d24; }
+.chart-horizontal-grid-lines { -fx-stroke: #2a2e3d; }
+.chart-vertical-grid-lines   { -fx-stroke: #2a2e3d; }
+
+/* ─── ProgressBar ────────────────────────────────────────────────── */
+.progress-bar { -fx-accent: -dc-accent-blue; }
+.progress-bar .bar { -fx-background-color: -dc-accent-blue; -fx-background-radius: 4; }
+.progress-bar .track { -fx-background-color: -dc-bg-card; -fx-background-radius: 4; }
+
+/* ─── Separator ─────────────────────────────────────────────────── */
+.separator .line { -fx-border-color: -dc-border; }
+
+/* ─── Labels statut ─────────────────────────────────────────────── */
+.status-msg { -fx-text-fill: -dc-accent-green; -fx-font-style: italic; -fx-font-size: 12px; }
+
+/* ─── Scrollbar ─────────────────────────────────────────────────── */
+.scroll-bar { -fx-background-color: -dc-bg-secondary; }
+.scroll-bar .thumb { -fx-background-color: -dc-border; -fx-background-radius: 4; }
+.scroll-bar .track { -fx-background-color: -dc-bg-secondary; }

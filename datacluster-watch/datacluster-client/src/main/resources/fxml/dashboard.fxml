@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.datacluster.client.controller.DashboardController"
+      styleClass="view-root" spacing="20">
+    <padding><Insets top="20" left="20" bottom="20" right="20"/></padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Tableau de bord" styleClass="view-title"/>
+        <Label fx:id="lblConnectionStatus" text="…" styleClass="status-badge"/>
+    </HBox>
+
+    <!-- Cards métriques cluster -->
+    <HBox spacing="15">
+        <!-- Nœuds -->
+        <VBox styleClass="metric-card" prefWidth="180">
+            <Label text="Nœuds actifs" styleClass="card-label"/>
+            <Label fx:id="lblActiveNodes" text="—" styleClass="card-value-green"/>
+            <Label text="DOWN :" styleClass="card-sublabel"/>
+            <Label fx:id="lblDownNodes" text="—" styleClass="card-value-red"/>
+        </VBox>
+        <!-- Jobs -->
+        <VBox styleClass="metric-card" prefWidth="180">
+            <Label text="Jobs actifs" styleClass="card-label"/>
+            <Label fx:id="lblActiveJobs" text="—" styleClass="card-value-blue"/>
+        </VBox>
+        <!-- Alertes -->
+        <VBox styleClass="metric-card" prefWidth="180">
+            <Label text="Alertes critiques" styleClass="card-label"/>
+            <Label fx:id="lblCriticalAlerts" text="—" styleClass="card-value-red"/>
+            <Label text="Total :" styleClass="card-sublabel"/>
+            <Label fx:id="lblTotalAlerts" text="—" styleClass="card-subvalue"/>
+        </VBox>
+        <!-- Cluster health -->
+        <VBox styleClass="metric-card" prefWidth="200">
+            <Label text="Santé cluster" styleClass="card-label"/>
+            <Label fx:id="lblClusterHealth" text="—" styleClass="card-value-green"/>
+            <VBox fx:id="healthBar" prefHeight="8" prefWidth="160"/>
+        </VBox>
+    </HBox>
+
+    <!-- Moyennes CPU / RAM / Disk -->
+    <HBox spacing="15">
+        <VBox styleClass="metric-card" prefWidth="180">
+            <Label text="CPU moyen" styleClass="card-label"/>
+            <Label fx:id="lblAvgCpu" text="—" styleClass="card-value-blue"/>
+        </VBox>
+        <VBox styleClass="metric-card" prefWidth="180">
+            <Label text="RAM moyenne" styleClass="card-label"/>
+            <Label fx:id="lblAvgRam" text="—" styleClass="card-value-blue"/>
+        </VBox>
+        <VBox styleClass="metric-card" prefWidth="180">
+            <Label text="Disque moyen" styleClass="card-label"/>
+            <Label fx:id="lblAvgDisk" text="—" styleClass="card-value-blue"/>
+        </VBox>
+    </HBox>
+</VBox>

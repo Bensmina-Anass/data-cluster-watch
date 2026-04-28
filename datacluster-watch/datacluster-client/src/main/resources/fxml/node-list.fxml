@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.datacluster.client.controller.NodeListController"
+      styleClass="view-root" spacing="12">
+    <padding><Insets top="20" left="20" bottom="20" right="20"/></padding>
+
+    <Label text="Liste des nœuds" styleClass="view-title"/>
+
+    <TableView fx:id="tableNodes" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId"     text="ID"          prefWidth="120"/>
+            <TableColumn fx:id="colName"   text="Nom"         prefWidth="160"/>
+            <TableColumn fx:id="colType"   text="Type"        prefWidth="90"/>
+            <TableColumn fx:id="colStatus" text="Statut"      prefWidth="90"/>
+            <TableColumn fx:id="colCpu"    text="CPU %"       prefWidth="90"/>
+            <TableColumn fx:id="colRam"    text="RAM %"       prefWidth="90"/>
+            <TableColumn fx:id="colDisk"   text="Disque %"    prefWidth="90"/>
+            <TableColumn fx:id="colJobs"   text="Jobs actifs" prefWidth="90"/>
+        </columns>
+        <placeholder><Label text="Aucun nœud enregistré"/></placeholder>
+    </TableView>
+</VBox>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.datacluster.client.controller.ExportController"
+      styleClass="view-root" spacing="16">
+    <padding><Insets top="20" left="20" bottom="20" right="20"/></padding>
+
+    <Label text="Export de données" styleClass="view-title"/>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Données :"/>
+        <ComboBox fx:id="cmbExportType" prefWidth="140"/>
+        <Label text="Format :"/>
+        <ComboBox fx:id="cmbFormat"     prefWidth="100"/>
+        <Label text="Nœud :"/>
+        <ComboBox fx:id="cmbNode"       prefWidth="140"/>
+        <Button fx:id="btnExport" text="Exporter" styleClass="btn-primary"/>
+    </HBox>
+
+    <Label fx:id="lblStatus" text="" styleClass="status-msg"/>
+
+    <TextArea fx:id="txtPreview" promptText="Aperçu de l'export…"
+              VBox.vgrow="ALWAYS" editable="false" wrapText="true"/>
+</VBox>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.datacluster.client.controller.JobController"
+      styleClass="view-root" spacing="12">
+    <padding><Insets top="20" left="20" bottom="20" right="20"/></padding>
+
+    <Label text="Jobs Big Data" styleClass="view-title"/>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Nœud :"/>
+        <ComboBox fx:id="cmbNodeFilter" prefWidth="140"/>
+        <Label text="Type :"/>
+        <ComboBox fx:id="cmbTypeFilter" prefWidth="160"/>
+        <Label fx:id="lblCount" text="0 job(s)"/>
+    </HBox>
+
+    <TableView fx:id="tableJobs" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colJobId"    text="ID Job"      prefWidth="260"/>
+            <TableColumn fx:id="colNode"     text="Nœud"        prefWidth="110"/>
+            <TableColumn fx:id="colType"     text="Type"        prefWidth="140"/>
+            <TableColumn fx:id="colStatus"   text="Statut"      prefWidth="90"/>
+            <TableColumn fx:id="colStart"    text="Démarré"     prefWidth="90"/>
+            <TableColumn fx:id="colProgress" text="Progression" prefWidth="140"/>
+        </columns>
+        <placeholder><Label text="Aucun job"/></placeholder>
+    </TableView>
+</VBox>

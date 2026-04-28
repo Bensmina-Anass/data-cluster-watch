@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.datacluster.client.controller.AlertController"
+      styleClass="view-root" spacing="12">
+    <padding><Insets top="20" left="20" bottom="20" right="20"/></padding>
+
+    <Label text="Alertes" styleClass="view-title"/>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Nœud :"/>
+        <ComboBox fx:id="cmbNodeFilter"  prefWidth="140"/>
+        <Label text="Niveau :"/>
+        <ComboBox fx:id="cmbLevelFilter" prefWidth="120"/>
+        <Button  fx:id="btnAcknowledge" text="Acquitter" styleClass="btn-primary"/>
+        <Label fx:id="lblCount" text="0 alerte(s)"/>
+    </HBox>
+
+    <TableView fx:id="tableAlerts" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colTimestamp" text="Horodatage"  prefWidth="160"/>
+            <TableColumn fx:id="colNode"      text="Nœud"        prefWidth="110"/>
+            <TableColumn fx:id="colLevel"     text="Niveau"      prefWidth="90"/>
+            <TableColumn fx:id="colType"      text="Type"        prefWidth="130"/>
+            <TableColumn fx:id="colMessage"   text="Message"     prefWidth="350"/>
+            <TableColumn fx:id="colAck"       text="Acquitté"    prefWidth="80"/>
+        </columns>
+        <placeholder><Label text="Aucune alerte"/></placeholder>
+    </TableView>
+</VBox>

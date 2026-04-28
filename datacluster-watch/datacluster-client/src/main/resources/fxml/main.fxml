@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.datacluster.client.view.MainController">
+
+    <!-- Barre de navigation gauche -->
+    <left>
+        <VBox styleClass="nav-panel" spacing="4" prefWidth="200">
+            <padding><Insets top="20" left="10" bottom="20" right="10"/></padding>
+            <Label text="DataCluster Watch" styleClass="nav-title"/>
+            <Separator/>
+            <Button text="📊  Tableau de bord"  onAction="#showDashboard"  maxWidth="Infinity" styleClass="nav-btn"/>
+            <Button text="🖥  Nœuds"            onAction="#showNodeList"   maxWidth="Infinity" styleClass="nav-btn"/>
+            <Button text="📈  Détail nœud"       onAction="#showNodeDetail" maxWidth="Infinity" styleClass="nav-btn"/>
+            <Button text="🔔  Alertes"           onAction="#showAlerts"     maxWidth="Infinity" styleClass="nav-btn"/>
+            <Button text="⚙  Jobs"              onAction="#showJobs"       maxWidth="Infinity" styleClass="nav-btn"/>
+            <Button text="📉  Statistiques"      onAction="#showStats"      maxWidth="Infinity" styleClass="nav-btn"/>
+            <Button text="🔧  Configuration"     onAction="#showConfig"     maxWidth="Infinity" styleClass="nav-btn"/>
+            <Button text="💾  Export"            onAction="#showExport"     maxWidth="Infinity" styleClass="nav-btn"/>
+        </VBox>
+    </left>
+
+    <!-- Zone de contenu centrale -->
+    <center>
+        <StackPane fx:id="contentPane" styleClass="content-pane"/>
+    </center>
+
+    <!-- Barre de statut -->
+    <bottom>
+        <HBox styleClass="status-bar" spacing="15" alignment="CENTER_LEFT">
+            <padding><Insets top="5" left="15" bottom="5" right="15"/></padding>
+            <Label text="DataCluster Watch v1.0" styleClass="status-label"/>
+            <Separator orientation="VERTICAL"/>
+            <Label fx:id="lblServerStatus" text="Connexion…" styleClass="status-label"/>
+        </HBox>
+    </bottom>
+</BorderPane>
