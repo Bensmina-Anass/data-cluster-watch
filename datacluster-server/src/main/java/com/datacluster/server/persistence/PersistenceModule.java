@@ -1,14 +1,12 @@
 package com.datacluster.server.persistence;
 
+import com.datacluster.common.util.ConfigLoader;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -36,6 +34,8 @@ public class PersistenceModule {
         hikariConfig.setPoolName("DataClusterPool");
         hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
         hikariConfig.addDataSourceProperty("prepStmtCacheSize", "250");
+        // En environnement Docker, MySQL peut ne pas être prêt immédiatement
+        hikariConfig.setInitializationFailTimeout(60_000);
         this.dataSource = new HikariDataSource(hikariConfig);
         LOGGER.info("HikariCP pool initialized: " + config.getProperty("db.url"));
     }
@@ -76,20 +76,11 @@ public class PersistenceModule {
     }
 
     /**
-     * Charge les propriétés depuis le classpath.
+     * Charge la configuration (classpath + variables d'environnement).
      *
-     * @return {@link Properties} chargées
-     * @throws IOException si le fichier n'est pas trouvé
+     * @return {@link Properties} fusionnées
      */
-    public static Properties loadConfig() throws IOException {
-        Properties props = new Properties();
-        try (InputStream is = PersistenceModule.class.getClassLoader()
-                .getResourceAsStream("application.properties")) {
-            if (is == null) {
-                throw new IOException("application.properties not found in classpath");
-            }
-            props.load(is);
-        }
-        return props;
+    public static Properties loadConfig() {
+        return ConfigLoader.load();
     }
 }

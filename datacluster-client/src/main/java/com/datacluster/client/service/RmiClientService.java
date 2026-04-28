@@ -82,13 +82,6 @@ public class RmiClientService {
     public IConfigService  getConfigService()    { return configService; }
 
     private static Properties loadConfig() {
-        Properties props = new Properties();
-        try (InputStream is = RmiClientService.class.getClassLoader()
-                .getResourceAsStream("application.properties")) {
-            if (is != null) props.load(is);
-        } catch (IOException e) {
-            LOGGER.log(Level.WARNING, "Cannot load application.properties", e);
-        }
-        return props;
+        return com.datacluster.common.util.ConfigLoader.load();
     }
 }

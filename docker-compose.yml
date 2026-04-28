@@ -1,0 +1,112 @@
+services:
+
+  # ─────────────────────────────────────────────────────────────
+  # Base de données MySQL 8
+  # ─────────────────────────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: dcw-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE:      datacluster_watch
+      MYSQL_USER:          ${DB_USERNAME:-datacluster}
+      MYSQL_PASSWORD:      ${DB_PASSWORD:-datacluster123}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    networks:
+      - dcw-net
+
+  # ─────────────────────────────────────────────────────────────
+  # Serveur central (UDP 5000 / TCP 6000 / RMI 1099)
+  # ─────────────────────────────────────────────────────────────
+  server:
+    build:
+      context: .
+      dockerfile: datacluster-server/Dockerfile
+    image: dcw-server:latest
+    container_name: dcw-server
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      # Base de données
+      DB_URL:      "jdbc:mysql://mysql:3306/datacluster_watch\
+                   ?useSSL=false&serverTimezone=UTC\
+                   &allowPublicKeyRetrieval=true"
+      DB_USERNAME: ${DB_USERNAME:-datacluster}
+      DB_PASSWORD: ${DB_PASSWORD:-datacluster123}
+      # Réseau
+      SERVER_UDP_PORT: 5000
+      SERVER_TCP_PORT: 6000
+      SERVER_RMI_PORT: 1099
+      # Hostname RMI exposé aux clients (doit être joignable depuis l'hôte)
+      JAVA_RMI_SERVER_HOSTNAME: ${RMI_HOSTNAME:-localhost}
+    ports:
+      - "5000:5000/udp"
+      - "6000:6000"
+      - "1099:1099"
+    networks:
+      - dcw-net
+
+  # ─────────────────────────────────────────────────────────────
+  # Agents de collecte (5 agents, mode chaos optionnel)
+  # ─────────────────────────────────────────────────────────────
+  agent:
+    build:
+      context: .
+      dockerfile: datacluster-agent/Dockerfile
+    image: dcw-agent:latest
+    container_name: dcw-agent
+    restart: unless-stopped
+    depends_on:
+      - server
+    environment:
+      SERVER_HOST:     server
+      SERVER_UDP_PORT: 5000
+      SERVER_TCP_PORT: 6000
+      # Décommenter pour activer le mode chaos :
+      # AGENT_ARGS: "--chaos"
+    networks:
+      - dcw-net
+
+  # ─────────────────────────────────────────────────────────────
+  # Client JavaFX (X11 forwarding requis — profil optionnel)
+  # Lancement : xhost +local:docker && docker compose --profile client up client
+  # ─────────────────────────────────────────────────────────────
+  client:
+    build:
+      context: .
+      dockerfile: datacluster-client/Dockerfile
+    image: dcw-client:latest
+    container_name: dcw-client
+    depends_on:
+      - server
+    environment:
+      SERVER_HOST:     ${RMI_HOSTNAME:-localhost}
+      SERVER_RMI_PORT: 1099
+      DISPLAY:         ${DISPLAY:-:0}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    network_mode: host   # Accès direct à localhost:1099 pour RMI
+    profiles:
+      - client           # Démarré uniquement avec --profile client
+
+volumes:
+  mysql-data:
+    name: dcw-mysql-data
+
+networks:
+  dcw-net:
+    name: dcw-network
+    driver: bridge

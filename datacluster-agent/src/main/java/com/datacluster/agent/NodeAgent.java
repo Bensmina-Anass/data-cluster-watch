@@ -73,18 +73,7 @@ public class NodeAgent {
     }
 
     private Properties loadConfig() {
-        Properties props = new Properties();
-        try (InputStream is = NodeAgent.class.getClassLoader()
-                .getResourceAsStream("application.properties")) {
-            if (is != null) {
-                props.load(is);
-            } else {
-                LOGGER.warning("application.properties not found, using defaults");
-            }
-        } catch (IOException e) {
-            LOGGER.warning("Could not load application.properties: " + e.getMessage());
-        }
-        return props;
+        return com.datacluster.common.util.ConfigLoader.load();
     }
 
     public String   getNodeId()    { return nodeId; }

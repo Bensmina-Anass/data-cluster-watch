@@ -31,14 +31,15 @@ public class ServerMain {
     private static final Logger LOGGER = Logger.getLogger(ServerMain.class.getName());
 
     public static void main(String[] args) {
-        Properties config;
-        try {
-            config = PersistenceModule.loadConfig();
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Cannot load application.properties", e);
-            System.exit(1);
-            return;
+        Properties config = PersistenceModule.loadConfig();
+
+        // Permet aux stubs RMI d'être joignables depuis l'extérieur (Docker, réseau)
+        String rmiHostname = System.getenv("JAVA_RMI_SERVER_HOSTNAME");
+        if (rmiHostname == null || rmiHostname.isBlank()) {
+            rmiHostname = config.getProperty("java.rmi.server.hostname", "localhost");
         }
+        System.setProperty("java.rmi.server.hostname", rmiHostname);
+        LOGGER.info("RMI hostname: " + rmiHostname);
 
         PersistenceModule pm = PersistenceModule.getInstance(config);
 
