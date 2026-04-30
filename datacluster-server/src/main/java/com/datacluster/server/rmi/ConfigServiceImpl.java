@@ -28,7 +28,7 @@ public class ConfigServiceImpl extends UnicastRemoteObject implements IConfigSer
      * @throws RemoteException si l'export RMI échoue
      */
     public ConfigServiceImpl(AlertEngine alertEngine, Properties serverConfig) throws RemoteException {
-        super();
+        super(1100);
         this.alertEngine  = alertEngine;
         this.serverConfig = serverConfig;
     }

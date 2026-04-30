@@ -38,7 +38,7 @@ public class ClusterServiceImpl extends UnicastRemoteObject implements IClusterS
      */
     public ClusterServiceImpl(NodeDAO nodeDAO, MetricsProcessor processor, AlertDAO alertDAO)
             throws RemoteException {
-        super();
+        super(1100);
         this.nodeDAO   = nodeDAO;
         this.processor = processor;
         this.alertDAO  = alertDAO;

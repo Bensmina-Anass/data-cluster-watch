@@ -26,7 +26,7 @@ public class AlertServiceImpl extends UnicastRemoteObject implements IAlertServi
      * @throws RemoteException si l'export RMI échoue
      */
     public AlertServiceImpl(AlertDAO alertDAO) throws RemoteException {
-        super();
+        super(1100);
         this.alertDAO = alertDAO;
     }
 

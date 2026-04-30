@@ -25,7 +25,7 @@ public class StatsServiceImpl extends UnicastRemoteObject implements IStatsServi
      * @throws RemoteException si l'export RMI échoue
      */
     public StatsServiceImpl(StatisticsEngine statsEngine) throws RemoteException {
-        super();
+        super(1100);
         this.statsEngine = statsEngine;
     }
 

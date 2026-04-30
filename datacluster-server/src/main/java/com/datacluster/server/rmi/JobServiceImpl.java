@@ -26,7 +26,7 @@ public class JobServiceImpl extends UnicastRemoteObject implements IJobService {
      * @throws RemoteException si l'export RMI échoue
      */
     public JobServiceImpl(JobDAO jobDAO) throws RemoteException {
-        super();
+        super(1100);
         this.jobDAO = jobDAO;
     }
 
