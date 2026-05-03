@@ -97,8 +97,16 @@ services:
       SERVER_HOST:     ${RMI_HOSTNAME:-localhost}
       SERVER_RMI_PORT: 1099
       DISPLAY:         ${DISPLAY:-:0}
+      LIBGL_ALWAYS_SOFTWARE: "1"
+      JAVA_OPTS: >-
+        --module-path /app/javafx-mods
+        --add-modules javafx.controls,javafx.fxml,javafx.graphics
+        -Dprism.order=sw
+        -Dprism.verbose=false
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    devices:
+      - /dev/dri:/dev/dri
     network_mode: host   # Accès direct à localhost:1099 pour RMI
     profiles:
       - client           # Démarré uniquement avec --profile client
